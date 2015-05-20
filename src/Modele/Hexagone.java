@@ -36,14 +36,24 @@ public class Hexagone extends JComponent{
 		return Hex;
 	}
 	
-	public void paint(Graphics g){
+/*	public void paint(Graphics g){
 		Hexagone.setCote(200);
 		Hexagone hex = new Hexagone(500, 500);
 		g.drawPolygon(hex.getHex());
 	}
-	
+*/	
 	public static int getCote()
 	{
 		return cote;
+	}
+	
+	public int getxCenter()
+	{
+		return xCenter;
+	}
+	
+	public int getyCenter()
+	{
+		return yCenter;
 	}
 }
