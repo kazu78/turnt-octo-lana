@@ -4,8 +4,12 @@ import java.awt.Graphics;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import Modele.Hexagone;
-import Vue.Plateau;
+import controleur.ControleurPlateauSouris;
+
+import vue.Plateau;
+
+import modele.Hexagone;
+
 
 
 public class Main {
@@ -14,7 +18,10 @@ public class Main {
 		JFrame fenetre = new JFrame("Hexagone");
 		fenetre.setSize((int)java.awt.Toolkit.getDefaultToolkit().getScreenSize().getWidth(),(int)java.awt.Toolkit.getDefaultToolkit().getScreenSize().getHeight());
 		fenetre.setResizable(false);
-		fenetre.getContentPane().add(new Plateau((int)java.awt.Toolkit.getDefaultToolkit().getScreenSize().getWidth(),(int)java.awt.Toolkit.getDefaultToolkit().getScreenSize().getHeight()));
+		ControleurPlateauSouris controleurSouris = new ControleurPlateauSouris();
+		Plateau plateau = new Plateau((int)java.awt.Toolkit.getDefaultToolkit().getScreenSize().getWidth(),(int)java.awt.Toolkit.getDefaultToolkit().getScreenSize().getHeight(),controleurSouris);
+		controleurSouris.setPlateau(plateau);
+		fenetre.getContentPane().add(plateau);
 		fenetre.setVisible(true);
 		fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);    
 		}

@@ -1,4 +1,4 @@
-package Vue;
+package vue;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -9,16 +9,21 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import Modele.Hexagone;
+import controleur.ControleurPlateauSouris;
+
+import modele.Hexagone;
+
 
 @SuppressWarnings("serial")
-public class Plateau extends JPanel implements MouseListener{
+public class Plateau extends JPanel{
 
-	Hexagone grille[][]=null;
+	private Hexagone grille[][]=null;
+	private ControleurPlateauSouris controleurSouris=null;
 	
-	public Plateau(int largueur,int hauteur)
+	public Plateau(int largueur,int hauteur,ControleurPlateauSouris controleur)
 	{
 		setSize(largueur, hauteur);
+		controleurSouris=controleur;
 		Hexagone.setCote(hauteur/5);
 		grille=new Hexagone[5][5];
 		int x=Hexagone.getCote()/2;
@@ -35,7 +40,12 @@ public class Plateau extends JPanel implements MouseListener{
 			x+=Hexagone.getCote()-((grille[i][0].getxCenter()+(Hexagone.getCote()/2))-(grille[i][0].getxCenter()+(Hexagone.getCote()/4)));
 			y+=Hexagone.getCote()/2;
 		}
-		addMouseListener(this);
+		addMouseListener(controleurSouris);
+	}
+	
+	public Hexagone[][] getCasePlateau()
+	{
+		return grille;
 	}
 
 	public void paintComponent(Graphics g)
@@ -84,59 +94,4 @@ public class Plateau extends JPanel implements MouseListener{
 			return true;
 		return false;
 	}
-
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		for(int i=0; i<grille.length;i++)
-		{
-			for(int j=0; j<grille[i].length;j++)
-				if(grille[i][j].getHex().contains(e.getX(), e.getY()))
-				{
-					for(int p=0; p<grille.length;p++)
-					{
-						for(int q=0; q<grille[p].length;q++)
-						{
-							if(caseDeDuplication(grille[i][j], grille[p][q]))
-							{
-								grille[p][q].setCouleur(Color.RED);
-							}
-							else if(caseDeDeplacement(grille[i][j], grille[p][q]))
-							{
-								grille[p][q].setCouleur(Color.GREEN);
-							}
-							else
-								{
-									grille[p][q].setCouleur(Color.WHITE);
-								}
-						}
-					}
-				}
-		}
-		repaint();
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
 }
