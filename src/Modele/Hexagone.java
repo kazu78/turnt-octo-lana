@@ -1,7 +1,6 @@
 package modele;
 
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Polygon;
 
 import javax.swing.JComponent;
