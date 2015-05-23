@@ -1,5 +1,6 @@
 package Modele;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Polygon;
 
@@ -12,6 +13,7 @@ public class Hexagone extends JComponent{
 	private int yCenter;
 	private static int cote;//=(int)java.awt.Toolkit.getDefaultToolkit().getScreenSize().getHeight()/z;
 	Polygon Hex= new Polygon();
+	private Color etat = new Color(255, 255, 255);
 	
 	public Hexagone(int x, int y)
 	{
@@ -55,5 +57,13 @@ public class Hexagone extends JComponent{
 	public int getyCenter()
 	{
 		return yCenter;
+	}
+	public Color getCouleur()
+	{
+		return etat;
+	}
+	public void setCouleur(Color couleur)
+	{
+		etat=couleur;
 	}
 }
